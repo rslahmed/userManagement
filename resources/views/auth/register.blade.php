@@ -19,12 +19,12 @@
 
                                     <div class="md-form">
                                         <i class="fas fa-user prefix white-text"></i>
-                                        <input name="name" type="text" id="orangeForm-name" class="form-control" placeholder="Your name">
+                                        <input name="name" type="text" id="orangeForm-name" class="form-control" placeholder="Your name" value="{{old('name')}}">
                                     </div>
 
                                     <div class="md-form">
                                         <i class="fas fa-envelope prefix white-text"></i>
-                                        <input name="email" type="email" id="orangeForm-email" class="form-control" placeholder="Your email">
+                                        <input name="email" type="email" id="orangeForm-email" class="form-control" placeholder="Your email" value="{{old('email')}}">
                                     </div>
 
                                     <div class="md-form">
@@ -35,6 +35,17 @@
                                     <div class="md-form">
                                         <i class="fas fa-lock prefix white-text"></i>
                                         <input name="password_confirmation" type="password" id="password_confirmation" class="form-control" placeholder="Confirm password">
+                                    </div>
+
+                                    <div class="md-form">
+                                        <i class="fas fa-th-large prefix white-text"></i>
+                                        <select class="mdb-select md-form initialized text-white ml-5" name="role_id" >
+                                            <option value="">Role</option>
+                                            @foreach($role->all() as $row)
+                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
 
                                     <div class="text-center">

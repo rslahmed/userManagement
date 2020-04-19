@@ -39,6 +39,13 @@
         input::placeholder{
             color: #fff !important;
         }
+        .select-wrapper input.select-dropdown, .select-wrapper span.caret {
+            color: #ffffff;
+            text-transform: capitalize;
+        }
+        .dropdown-content li > a, .dropdown-content li > span {
+            text-transform: capitalize;
+        }
     </style>
 </head>
 
@@ -66,6 +73,11 @@
             @endforeach
         @endif
     })
+
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').material_select();
+    });
 </script>
 </body>
 
