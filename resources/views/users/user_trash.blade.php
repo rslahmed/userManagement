@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-white">All users</div>
+                    <div class="card-header text-white">User trash</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -30,18 +30,14 @@
                                             {{$row->role->name}}
                                         </td>
                                         <td>
-                                            <a href="{{route('user.view', $row->id)}}" class=" btn-success btn-sm white-text"><i class="far fa-eye"></i></a>
-                                            <a href="#" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                            <a href="javascript:void(0)" user-id="{{$row->id}}" class=" btn-danger btn-sm text-white delete_user"><i class="far fa-trash-alt"></i></a>
+                                            <a href="{{route('user.restore', $row->id)}}" class=" btn-success btn-sm white-text"><i class="fas fa-trash-restore-alt"></i></a>
+                                            <a href="{{route('user.destroy', $row->id)}}" user-id="{{$row->id}}" class=" btn-danger btn-sm text-white"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <a href="{{route('user.trash')}}"><i class="far fa-trash-alt"></i> View trash</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +62,7 @@
                 function(){
                     // $('.preloader').show();
                     swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                    window.location = '/user/'+delete_id+'/delete';
+                    window.location = '/user/'+delete_id+'/destroy';
                 });
         })
     </script>

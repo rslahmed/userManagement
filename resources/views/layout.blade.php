@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <!-- Your custom styles (optional) -->
@@ -176,27 +177,13 @@
     </nav>
     <!-- Navbar -->
 
-    <!-- Fixed button -->
-    <div class="fixed-action-btn clearfix d-none d-xl-block" style="bottom: 45px; right: 24px;">
-
-        <a class="btn-floating btn-lg red">
-            <i class="fas fa-pencil-alt"></i>
-        </a>
-
-        <ul class="list-unstyled">
-            <li><a class="btn-floating red"><i class="fas fa-star"></i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="fas fa-user"></i></a></li>
-            <li><a class="btn-floating green"><i class="fas fa-envelope"></i></a></li>
-            <li><a class="btn-floating blue"><i class="fas fa-shopping-cart"></i></a></li>
-        </ul>
-
-    </div>
-    <!-- Fixed button -->
-
 </header>
 <!-- Main Navigation -->
 
 <!-- Main layout -->
+<div class="preloader">
+    <img src="{{asset('img/preloader.gif')}}" alt="">
+</div>
 <main>
 
     @yield('content')
@@ -214,10 +201,11 @@
 <script type="text/javascript" src="{{asset('js/bootstrap.js')}}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/sweetalert.js')}}"></script>
 
 <!-- Initializations -->
 <script>
-
+$(document).ready(function(){
     // SideNav Initialization
     $(".button-collapse").sideNav();
 
@@ -240,9 +228,14 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
+    @if (Session::has('success'))
+        toastr.success('{{Session::get('success')}}');
+    @endif
+})
 </script>
 
+
+@yield('script')
 
 </body>
 
