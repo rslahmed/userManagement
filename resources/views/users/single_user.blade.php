@@ -31,6 +31,7 @@
                                     <th>ROLE</th>
                                     <td>{{$user->role->name}}</td>
                                 </tr>
+                                @if($user->id != 1)
                                 <tr>
                                     <th>ACTION</th>
                                     <td>
@@ -38,6 +39,7 @@
                                         <a href="{{route('user.destroy', $user->id)}}" class="btn-danger btn-sm text-white"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
+                                    @endif
                             </table>
                         </div>
                     </div>

@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'name' => 'admin',
+            'name' => 'Super Admin',
             'activity_log' => 1,
+            'activity_delete' => 1,
+            'user_access' => 1,
             'user_add' => 1,
             'user_edit' => 1,
             'user_delete' => 1,
+            'role_access' => 1,
             'role_add' => 1,
             'role_edit' => 1,
             'role_delete' => 1,

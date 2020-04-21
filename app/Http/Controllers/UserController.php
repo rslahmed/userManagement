@@ -16,6 +16,9 @@ class UserController extends Controller
     }
 
     public function delete(User $user){
+        if($user->id == 1){
+            return back()->with('warning', 'Super Admin is not deletable');
+        }
         $user->delete();
         return back()->with('success', 'User has been deleted');
     }
@@ -33,5 +36,16 @@ class UserController extends Controller
     public function trash(){
         $user = User::onlyTrashed()->get();
         return view('users.user_trash', compact('user'));
+    }
+
+    public function edit(User $user){
+        if($user->id == 1){
+            return back()->with('warning', 'Super Admin is not editable');
+        }
+        return view('users.edit_user', compact('user'));
+    }
+
+    public function update(User $user){
+
     }
 }

@@ -228,9 +228,43 @@ $(document).ready(function(){
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
     @if (Session::has('success'))
         toastr.success('{{Session::get('success')}}');
+    @elseif(Session::has('warning'))
+        toastr.warning('{{Session::get('warning')}}');
+    @elseif(Session::has('error'))
+        toastr.error('{{Session::get('error')}}');
     @endif
+
+    // check for error
+    $(document).ready(function(){
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        toastr.error('{{$error}}');
+        @endforeach
+        @endif
+    })
+
+    //delete confirm
+    $(document).on('click', '.delete_btn', function (e) {
+        e.preventDefault();
+        let deleteLink = $(this).attr('href');
+        swal({
+                title: "Are you sure?",
+                text: "This Role will be deleted",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function(){
+                // $('.preloader').show();
+                swal("Deleted!", "This Role has been deleted.", "success");
+                window.location = deleteLink;
+            });
+    })
 })
 </script>
 

@@ -31,8 +31,11 @@
                                         </td>
                                         <td>
                                             <a href="{{route('user.view', $row->id)}}" class=" btn-success btn-sm white-text"><i class="far fa-eye"></i></a>
-                                            <a href="#" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                            <a href="javascript:void(0)" user-id="{{$row->id}}" class=" btn-danger btn-sm text-white delete_user"><i class="far fa-trash-alt"></i></a>
+                                            @if($row->id != 1)
+                                                <a href="#" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                                <a href="{{route('user.delete', $row->id)}}" class=" btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -47,27 +50,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script !src="">
-        $(document).on('click', '.delete_user', function (e) {
-            e.preventDefault();
-            let delete_id = $(this).attr('user-id');
-            swal({
-                    title: "Are you sure?",
-                    text: "Your will not be able to recover this imaginary file!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                },
-                function(){
-                    // $('.preloader').show();
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                    window.location = '/user/'+delete_id+'/delete';
-                });
-        })
-    </script>
 @endsection
