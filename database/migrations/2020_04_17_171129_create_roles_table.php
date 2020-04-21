@@ -17,9 +17,12 @@ class CreateRolesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('activity_log')->nullable();
+            $table->integer('activity_delete')->nullable();
+            $table->integer('user_access')->nullable();
             $table->integer('user_add')->nullable();
             $table->integer('user_edit')->nullable();
             $table->integer('user_delete')->nullable();
+            $table->integer('role_access')->nullable();
             $table->integer('role_add')->nullable();
             $table->integer('role_edit')->nullable();
             $table->integer('role_delete')->nullable();

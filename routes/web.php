@@ -24,13 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/{user}/update', 'UserController@update')->name('user.update');
 
 //role
-    Route::get('/role/', 'HomeController@index')->name('role.all');
-    Route::get('/role/add', 'HomeController@index')->name('role.add');
-    Route::post('/role/store', 'HomeController@index')->name('role.store');
-    Route::get('/role/{role}/view', 'HomeController@index')->name('role.view');
-    Route::get('/role/{role}/delete', 'HomeController@index')->name('role.delete');
-    Route::get('/role/{role}/edit', 'HomeController@index')->name('role.edit');
-    Route::post('/role/{role}/update', 'HomeController@index')->name('role.update');
+    Route::get('/role/', 'RoleController@index')->name('role.all');
+    Route::get('/role/add', 'RoleController@add')->name('role.add');
+    Route::post('/role/store', 'RoleController@store')->name('role.store');
+    Route::get('/role/{role}/view', 'RoleController@index')->name('role.view');
+    Route::get('/role/{role}/delete', 'RoleController@index')->name('role.delete');
+    Route::get('/role/{role}/edit', 'RoleController@index')->name('role.edit');
+    Route::post('/role/{role}/update', 'RoleController@index')->name('role.update');
 
 //activity log
     Route::post('/activity/', 'HomeController@index')->name('activity.log');
