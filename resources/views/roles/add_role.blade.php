@@ -10,7 +10,7 @@
                         <form action="{{route('role.store')}}" method="post">
                             @csrf
                             <div class="md-form">
-                                <input name="name" type="text" class="form-control">
+                                <input name="name" type="text" class="form-control" required>
                                 <label for="form1" class="active">Role Name</label>
                             </div>
                             <div class="activity-log d-flex mb-4">

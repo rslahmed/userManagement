@@ -74,6 +74,14 @@
         @endif
     })
 
+    @if (Session::has('success'))
+    toastr.success('{{Session::get('success')}}');
+    @elseif(Session::has('warning'))
+    toastr.warning('{{Session::get('warning')}}');
+    @elseif(Session::has('error'))
+    toastr.error('{{Session::get('error')}}');
+    @endif
+
     // Material Select Initialization
     $(document).ready(function () {
         $('.mdb-select').material_select();

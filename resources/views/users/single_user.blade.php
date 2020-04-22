@@ -29,13 +29,19 @@
                                 </tr>
                                 <tr>
                                     <th>ROLE</th>
-                                    <td>{{$user->role->name}}</td>
+                                    <td>
+                                        @if($user->role)
+                                            {{$user->role->name}}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                 </tr>
                                 @if($user->id != 1)
                                 <tr>
                                     <th>ACTION</th>
                                     <td>
-                                        <a href="#" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                        <a href="{{route('user.edit', $user->id)}}" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                         <a href="{{route('user.destroy', $user->id)}}" class="btn-danger btn-sm text-white"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header text-white d-flex align-items-center justify-content-between">
                         <h4 class="mb-0">All Roles</h4>
-                        <a href="{{route('role.add')}}" class="btn btn-success btn-sm text-uppercase font-weight-bold">Add user</a>
+                        <a href="{{route('role.add')}}" class="btn bg-white text-dark btn-sm text-uppercase font-weight-bold">Add Role</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

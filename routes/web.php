@@ -7,10 +7,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//logout
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::middleware('auth')->group(function () {
+//home
     Route::get('/home', 'HomeController@index')->name('home');
-
 //user
     Route::get('/user', 'UserController@index')->name('user.all');
     Route::get('/user/add', 'UserController@add')->name('user.add');
@@ -20,10 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}/delete', 'UserController@delete')->name('user.delete');
     Route::get('/user/{user}/destroy', 'UserController@destroy')->name('user.destroy');
     Route::get('/user/{user}/restore', 'UserController@restore')->name('user.restore');
-    // TODO user edit update
     Route::get('/user/{user}/edit', 'UserController@edit')->name('user.edit');
     Route::post('/user/{user}/update', 'UserController@update')->name('user.update');
-    // TODO user password change
+    Route::get('/user/{user}/edit_password', 'UserController@editPassword')->name('user.editPassword');
+    Route::post('/user/{user}/update_password', 'UserController@updatePassword')->name('user.updatePassword');
 
 //role
     Route::get('/role/', 'RoleController@index')->name('role.all');

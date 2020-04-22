@@ -5,7 +5,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-white">All users</div>
+                    <div class="card-header text-white d-flex align-items-center justify-content-between">
+                        <h4>All users</h4>
+                        <a href="{{route('register')}}" class="btn btn-sm bg-white text-dark font-weight-bold">Add User</a>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -27,12 +30,16 @@
                                         <td>{{$row->email}}</td>
                                         <td>@if($row->status == 1)Active @else Deactive @endif</td>
                                         <td class="text-capitalize">
-                                            {{$row->role->name}}
+                                            @if($row->role)
+                                                {{$row->role->name}}
+                                            @else
+                                                N/A
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="{{route('user.view', $row->id)}}" class=" btn-success btn-sm white-text"><i class="far fa-eye"></i></a>
                                             @if($row->id != 1)
-                                                <a href="#" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                                <a href="{{route('user.edit', $row->id)}}" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                                 <a href="{{route('user.delete', $row->id)}}" class=" btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
                                             @endif
 
