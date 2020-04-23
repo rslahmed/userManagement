@@ -22,7 +22,7 @@ class UserController extends Controller
             return back()->with('warning', 'Super Admin is not deletable');
         }
         $user->delete();
-        return back()->with('success', 'User has been deleted');
+        return redirect(route('user.all'))->with('success', 'User has been deleted');
     }
 
     public function restore($id){
@@ -48,28 +48,27 @@ class UserController extends Controller
     }
 
     public function update(User $user){
-        $data = request()->validate([
-           'name' => ['required', 'string', 'min:3', 'max:25'],
-           'role_id' => ['required', 'integer'],
-           'status' => ['required', 'integer'],
-        ]);
+        $data = null;
+        if(request()->task == 'profile_update'){
 
-        if($user->email != request()->email){
-            request()->validate([
-                'email' =>['required', 'string', 'email', 'max:255', 'unique:users'],
+        }
+        elseif(request()->task == 'general_update'){
+            $data = request()->validate([
+                'name' => ['required', 'string', 'min:3', 'max:25'],
+                'role_id' => ['required', 'integer'],
+                'status' => ['required', 'integer'],
             ]);
-            $data['email'] = request()->email;
+
+            if($user->email != request()->email){
+                request()->validate([
+                    'email' =>['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
+                $data['email'] = request()->email;
+            }
         }
 
         $user->update($data);
         return redirect(route('user.all'))->with('success', 'User has been updated');
-    }
-
-    function editPassword(User $user){
-        if(auth()->user()->id != $user->id){
-            return back()->with('error', 'You can only change logged in user password');
-        }
-        return view('users.edit_user_password', compact('user'));
     }
 
     function updatePassword(User $user){

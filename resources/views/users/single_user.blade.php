@@ -42,7 +42,7 @@
                                     <th>ACTION</th>
                                     <td>
                                         <a href="{{route('user.edit', $user->id)}}" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                                        <a href="{{route('user.destroy', $user->id)}}" class="btn-danger btn-sm text-white"><i class="far fa-trash-alt"></i></a>
+                                        <a href="{{route('user.delete', $user->id)}}" class="btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                     @endif

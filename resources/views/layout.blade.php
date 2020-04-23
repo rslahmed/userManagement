@@ -109,14 +109,10 @@
 
         <!-- Breadcrumb -->
         <div class="breadcrumb-dn mr-auto">
-            <p>Dashboard v.1</p>
+            <p>Dashboard</p>
         </div>
 
         <div class="d-flex change-mode">
-
-            <div class="ml-auto mb-0 mr-3 change-mode-wrapper">
-                <button class="btn btn-outline-black btn-sm" id="dark-mode">Change Mode</button>
-            </div>
 
             <!-- Navbar links -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">

@@ -10,7 +10,7 @@ Auth::routes();
 //logout
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['active_user', 'auth'])->group(function () {
 //home
     Route::get('/home', 'HomeController@index')->name('home');
 //user
@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}/restore', 'UserController@restore')->name('user.restore');
     Route::get('/user/{user}/edit', 'UserController@edit')->name('user.edit');
     Route::post('/user/{user}/update', 'UserController@update')->name('user.update');
-    Route::get('/user/{user}/edit_password', 'UserController@editPassword')->name('user.editPassword');
     Route::post('/user/{user}/update_password', 'UserController@updatePassword')->name('user.updatePassword');
 
 //role

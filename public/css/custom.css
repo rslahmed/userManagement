@@ -22,3 +22,15 @@
 .w-30{
     width: 30%;
 }
+
+.user_pcard{
+    position: absolute;
+    right: 70px;
+    top: 90px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.profile_tab{
+    min-height: 550px;
+}
