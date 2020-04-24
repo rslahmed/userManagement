@@ -34,3 +34,11 @@
 .profile_tab{
     min-height: 550px;
 }
+
+.single-check{
+    display: none;
+}
+
+.access_wrap.active .single-check{
+    display: block;
+}

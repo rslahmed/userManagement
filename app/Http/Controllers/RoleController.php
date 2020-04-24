@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     function index(Role $role){
+        if(!auth()->user()->role || auth()->user()->role->role_access != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
         return view('roles.all_roles', compact('role'));
     }
 
     function add(){
+        if(!auth()->user()->role || auth()->user()->role->role_add != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
         return view('roles.add_role');
     }
 
     function view(Role $role){
+        if(!auth()->user()->role || auth()->user()->role->role_access != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
+
         return view('roles.view_role', compact('role'));
     }
 
@@ -26,6 +36,10 @@ class RoleController extends Controller
     }
 
     function edit(Role $role){
+        if(!auth()->user()->role || auth()->user()->role->role_edit != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
+
         if($role->id == 1){
             return back()->with('warning', 'Super Admin is not editable');
         }
@@ -39,6 +53,10 @@ class RoleController extends Controller
     }
 
     function destroy(Role $role){
+        if(!auth()->user()->role || auth()->user()->role->role_delete != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
+
         if($role->id == 1){
             return back()->with('warning', 'Super Admin is not deletable');
         }

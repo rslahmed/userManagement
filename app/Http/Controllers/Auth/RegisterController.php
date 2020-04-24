@@ -46,6 +46,10 @@ class RegisterController extends Controller
 //    show register form
     public function showRegistrationForm(Role $role)
     {
+        if(!auth()->user()->role || auth()->user()->role->user_delete != 1){
+            return back()->with('error', "sorry, you don't have access");
+        }
+
         return view('auth.register', compact('role'));
     }
     /**

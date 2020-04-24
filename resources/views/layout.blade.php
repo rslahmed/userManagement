@@ -56,6 +56,7 @@
                         </a>
 
                     </li>
+                    @if(auth()->user()->role && auth()->user()->role->user_access)
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
                             <i class="w-fa fas fa-user"></i>User<i class="fas fa-angle-down rotate-icon"></i>
@@ -71,6 +72,9 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if(auth()->user()->role && auth()->user()->role->role_access)
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
                             <i class="w-fa far fa-check-square"></i>Role<i class="fas fa-angle-down rotate-icon"></i>
@@ -86,9 +90,13 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if(auth()->user()->role && auth()->user()->role->activity_log)
                     <li>
                         <a href="{{route('activity.log')}}" class="collapsible-header waves-effect"><i class="w-fa far fa-bell"></i>Activity log</a>
                     </li>
+                    @endif
 
                 </ul>
             </li>
