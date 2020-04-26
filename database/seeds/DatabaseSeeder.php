@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role_id' => 1,
             'status' => 1,
+            'created_at' => \Carbon\Carbon::now(),
         ]);
     }
 }

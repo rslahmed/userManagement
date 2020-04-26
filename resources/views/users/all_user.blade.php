@@ -38,9 +38,13 @@
                                         </td>
                                         <td>
                                             <a href="{{route('user.view', $row->id)}}" class=" btn-success btn-sm white-text"><i class="far fa-eye"></i></a>
-                                            @if($row->id != 1)
+                                            @if($row->id != 1 )
+                                                @if(auth()->user()->role && auth()->user()->role->user_edit)
                                                 <a href="{{route('user.edit', $row->id)}}" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                                @endif
+                                                @if(auth()->user()->role && auth()->user()->role->user_delete)
                                                 <a href="{{route('user.delete', $row->id)}}" class=" btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
+                                                @endif
                                             @endif
 
                                         </td>

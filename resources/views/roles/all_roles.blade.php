@@ -28,8 +28,12 @@
                                         <td>
                                             <a href="{{route('role.view', $row->id)}}" class=" btn-success btn-sm white-text"><i class="far fa-eye"></i></a>
                                             @if($row->id != 1)
+                                            @if(auth()->user()->role && auth()->user()->role->role_edit)
                                             <a href="{{route('role.edit', $row->id)}}" class=" btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                            @endif
+                                            @if(auth()->user()->role && auth()->user()->role->role_delete)
                                             <a href="{{route('role.destroy', $row->id)}}" class="btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
+                                            @endif
                                             @endif
                                         </td>
 

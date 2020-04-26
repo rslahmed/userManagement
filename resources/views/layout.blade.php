@@ -63,9 +63,11 @@
                         </a>
                         <div class="collapsible-body">
                             <ul>
+                                @if(auth()->user()->role && auth()->user()->role->user_add)
                                 <li>
                                     <a href="{{ route('register') }}" class="waves-effect">Add User</a>
                                 </li>
+                                @endif
                                 <li>
                                     <a href="{{route('user.all')}}" class="waves-effect">View User</a>
                                 </li>
@@ -81,9 +83,11 @@
                         </a>
                         <div class="collapsible-body">
                             <ul>
+                                @if(auth()->user()->role && auth()->user()->role->role_add)
                                 <li>
                                     <a href="{{route('role.add')}}" class="waves-effect">Add Role</a>
                                 </li>
+                                @endif
                                 <li>
                                     <a href="{{route('role.all')}}" class="waves-effect">View Role</a>
                                 </li>
@@ -95,6 +99,12 @@
                     @if(auth()->user()->role && auth()->user()->role->activity_log)
                     <li>
                         <a href="{{route('activity.log')}}" class="collapsible-header waves-effect"><i class="w-fa far fa-bell"></i>Activity log</a>
+                    </li>
+                    @endif
+
+                    @if(auth()->user()->role && auth()->user()->role->setting_access)
+                    <li>
+                        <a href="{{route('activity.log')}}" class="collapsible-header waves-effect"><i class="fas fa-cog"></i>Settings</a>
                     </li>
                     @endif
 
