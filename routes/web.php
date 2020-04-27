@@ -36,7 +36,6 @@ Route::middleware(['active_user', 'auth'])->group(function () {
     Route::post('/role/{role}/update', 'RoleController@update')->name('role.update');
 
 //activity log
-    // TODO work on activity log
-    Route::post('/activity/', 'HomeController@index')->name('activity.log');
-    Route::post('/activity/{activity}/delete', 'HomeController@index')->name('activity.delete');
+    Route::get('/activity/', 'ActivityController@index')->name('activity.log');
+    Route::get('/activity/{activity}/destroy', 'ActivityController@destroy')->name('activity.destroy');
 });

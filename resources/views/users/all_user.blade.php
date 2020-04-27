@@ -7,7 +7,9 @@
                 <div class="card">
                     <div class="card-header text-white d-flex align-items-center justify-content-between">
                         <h4>All users</h4>
+                        @if(auth()->user()->role && auth()->user()->role->user_add == 1)
                         <a href="{{route('register')}}" class="btn btn-sm bg-white text-dark font-weight-bold">Add User</a>
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -52,6 +54,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $user->links() }}
                         </div>
                     </div>
                     <div class="card-footer text-right">

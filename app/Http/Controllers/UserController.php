@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -9,10 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(User $user){
+    public function index(){
         if(!auth()->user()->role || auth()->user()->role->user_access != 1){
             return back()->with('error', "sorry, you don't have access");
         }
+        $user = User::paginate(10);
         return view('users.all_user', compact('user'));
     }
 
@@ -32,7 +34,18 @@ class UserController extends Controller
         if($user->id == 1){
             return back()->with('warning', 'Super Admin is not deletable');
         }
-        $user->delete();
+
+        if($user->id == 1){
+            return back()->with('warning', 'Super Admin is not deletable');
+        }
+        $delete = $user->delete();
+        if($delete){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'deleted',
+                'event_target' => 'user',
+            ]);
+        }
         return redirect(route('user.all'))->with('success', 'User has been deleted');
     }
 
@@ -41,7 +54,14 @@ class UserController extends Controller
             return back()->with('error', "sorry, you don't have access");
         }
 
-        User::onlyTrashed()->where('id', $id)->restore();
+        $restore = User::onlyTrashed()->where('id', $id)->restore();
+        if($restore){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'restored',
+                'event_target' => 'user',
+            ]);
+        }
         return back()->with('success', 'User has been restored');
     }
 
@@ -50,7 +70,14 @@ class UserController extends Controller
             return back()->with('error', "sorry, you don't have access");
         }
 
-        User::onlyTrashed()->where('id', $id)->forceDelete();
+        $delete = User::onlyTrashed()->where('id', $id)->forceDelete();
+        if($delete){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'permanently deleted',
+                'event_target' => 'user',
+            ]);
+        }
         return back()->with('success', 'User has been permanently deleted');
     }
 
@@ -94,7 +121,15 @@ class UserController extends Controller
             }
         }
 
-        $user->update($data);
+        $update = $user->update($data);
+
+        if($update){
+            Activity::create([
+               'user_name' => auth()->user()->name,
+               'event_name' => 'updated',
+               'event_target' => 'user',
+            ]);
+        }
         return redirect(route('user.all'))->with('success', 'User has been updated');
     }
 

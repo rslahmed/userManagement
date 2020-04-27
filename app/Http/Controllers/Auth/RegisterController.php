@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Activity;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Role;
@@ -46,7 +47,7 @@ class RegisterController extends Controller
 //    show register form
     public function showRegistrationForm(Role $role)
     {
-        if(!auth()->user()->role || auth()->user()->role->user_delete != 1){
+        if(!auth()->user()->role || auth()->user()->role->user_add != 1){
             return back()->with('error', "sorry, you don't have access");
         }
 
@@ -76,11 +77,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id' => $data['role_id'],
         ])->with('success', 'New User has been added!');
+        if($user){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'created',
+                'event_target' => 'user',
+            ]);
+        }
+        return $user;
     }
 }

@@ -31,7 +31,7 @@
                                         </td>
                                         <td>
                                             <a href="{{route('user.restore', $row->id)}}" class=" btn-success btn-sm white-text"><i class="fas fa-trash-restore-alt"></i></a>
-                                            <a href="{{route('user.destroy', $row->id)}}" user-id="{{$row->id}}" class=" btn-danger btn-sm text-white"><i class="far fa-trash-alt"></i></a>
+                                            <a href="{{route('user.destroy', $row->id)}}" user-id="{{$row->id}}" class=" btn-danger btn-sm text-white delete_btn"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    function index(Role $role){
+    function index(){
         if(!auth()->user()->role || auth()->user()->role->role_access != 1){
             return back()->with('error', "sorry, you don't have access");
         }
+        $role = Role::paginate(10);
         return view('roles.all_roles', compact('role'));
     }
 
@@ -25,13 +27,19 @@ class RoleController extends Controller
         if(!auth()->user()->role || auth()->user()->role->role_access != 1){
             return back()->with('error', "sorry, you don't have access");
         }
-
         return view('roles.view_role', compact('role'));
     }
 
     function store(Role $role){
         $data = $this->validateRole();
-        $role->create($data);
+        $create = $role->create($data);
+        if($create){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'created',
+                'event_target' => 'role',
+            ]);
+        }
         return redirect(route('role.all'))->with('success', 'New Roles added');
     }
 
@@ -48,7 +56,14 @@ class RoleController extends Controller
 
     function update(Role $role){
         $data = $this->validateRole();
-        $role->update($data);
+        $update = $role->update($data);
+        if($update){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'updated',
+                'event_target' => 'role',
+            ]);
+        }
         return redirect(route('role.all'))->with('success', 'Role has been updated');
     }
 
@@ -60,7 +75,14 @@ class RoleController extends Controller
         if($role->id == 1){
             return back()->with('warning', 'Super Admin is not deletable');
         }
-        $role->delete();
+        $delete = $role->delete();
+        if($delete){
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'deleted',
+                'event_target' => 'role',
+            ]);
+        }
         return redirect(route('role.all'))->with('success', 'The Role has been deleted');
     }
 
