@@ -70,15 +70,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="mb-4">Profile settings</h4>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Profile picture</span>
+                            <form action="{{route('user.storeImage', $user->id)}}" method="POST">
+                                @csrf
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Profile picture</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input name="image" type="hidden" id="crop_img">
+                                        <input type="file" class="custom-file-input" id="upload_image">
+                                        <label class="custom-file-label" for="upload_image">Choose image</label>
+                                    </div>
                                 </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose image</label>
+                                <div class="sub-btn">
+                                    <button type="submit" class="btn btn-primary btn-sm">Upload</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -123,7 +130,7 @@
         <div class="card card-cascade narrower user_pcard">
             <!-- Card image -->
             <div class="view view-cascade overlay">
-                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/men.jpg" alt="Card image cap">
+                <img class="card-img-top" src="@if($user->image) {{asset($user->image)}} @else {{asset('/uploads/default.jpg')}} @endif" alt="Card image cap">
                 <a>
                     <div class="mask rgba-white-slight waves-effect waves-light"></div>
                 </a>
@@ -145,4 +152,74 @@
         </div>
     </div>
 </div>
+
+{{--    modal--}}
+<div id="uploadimageModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Upload & Crop Image</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="image_demo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success crop_image">Crop image</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+
+            $image_crop = $('#image_demo').croppie({
+                enableExif: true,
+                viewport: {
+                    width:368,
+                    height:245,
+                    type:'square' //circle
+                },
+                boundary:{
+                    width:470,
+                    height:350
+                }
+            });
+
+            $('#upload_image').on('change', function(){
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $image_crop.croppie('bind', {
+                        url: event.target.result
+                    }).then(function(){
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(this.files[0]);
+                $('#uploadimageModal').modal('show');
+            });
+
+            $('.crop_image').click(function(event){
+                $image_crop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function(response){
+                    let data = response.split(',');
+                    let img = data[1];
+                    $('#crop_img').val(img);
+                    console.log(img);
+                    $('#uploadimageModal').modal('hide');
+                })
+            });
+
+        });
+    </script>
 @endsection

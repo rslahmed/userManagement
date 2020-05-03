@@ -134,18 +134,51 @@ class UserController extends Controller
     }
 
     function updatePassword(User $user){
+        request()->validate([
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
+        ]);
+
         if(Hash::check(request()->old_password, $user->password)){
-            request()->validate([
-                'password' => ['required', 'string', 'min:3', 'confirmed'],
-            ]);
-            $user->update([
+
+            $update = $user->update([
                 'password' => Hash::make(request()->password)
             ]);
+
+            if($update){
+                Activity::create([
+                    'user_name' => auth()->user()->name,
+                    'event_name' => 'changed',
+                    'event_target' => 'user password',
+                ]);
+            }
             return redirect(route('user.all'))->with('success', 'Your password has changed');
         }
         else{
             return back()->with('error', 'Your credential is not matched');
         }
+
+    }
+
+    function storeImage(User $user){
+        // create image
+        $image = base64_decode(request()->image);
+        $imageName ='/uploads/'.uniqid().time().'.jpg';
+
+        $update = $user->update([
+           'image' => $imageName
+        ]);
+
+        if($update){
+            file_put_contents( public_path().$imageName, $image);
+            Activity::create([
+                'user_name' => auth()->user()->name,
+                'event_name' => 'updated',
+                'event_target' => 'user image',
+            ]);
+        }
+
+        return back()->with('success', 'Image has been updated');
+
 
     }
 }

@@ -25,6 +25,7 @@ Route::middleware(['active_user', 'auth'])->group(function () {
     Route::get('/user/{user}/edit', 'UserController@edit')->name('user.edit');
     Route::post('/user/{user}/update', 'UserController@update')->name('user.update');
     Route::post('/user/{user}/update_password', 'UserController@updatePassword')->name('user.updatePassword');
+    Route::post('/user/{user}/store_image', 'UserController@storeImage')->name('user.storeImage');
 
 //role
     Route::get('/role/', 'RoleController@index')->name('role.all');
@@ -39,3 +40,8 @@ Route::middleware(['active_user', 'auth'])->group(function () {
     Route::get('/activity/', 'ActivityController@index')->name('activity.log');
     Route::get('/activity/{activity}/destroy', 'ActivityController@destroy')->name('activity.destroy');
 });
+
+
+Route::get('/email', 'EmailController@index');
+Route::post('/sendmail', 'EmailController@sendEmail');
+

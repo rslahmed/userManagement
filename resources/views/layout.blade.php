@@ -14,6 +14,7 @@
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/croppie.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <!-- Your custom styles (optional) -->
     <style>
@@ -213,9 +214,11 @@
 <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="{{asset('js/bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/croppie.js')}}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/sweetalert.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/croppie.js')}}"></script>
 
 <!-- Initializations -->
 <script>
