@@ -161,6 +161,9 @@ class UserController extends Controller
 
     function storeImage(User $user){
         // create image
+        request()->validate([
+            'image' => 'required'
+        ]);
         $image = base64_decode(request()->image);
         $imageName ='/uploads/'.uniqid().time().'.jpg';
 
@@ -175,10 +178,9 @@ class UserController extends Controller
                 'event_name' => 'updated',
                 'event_target' => 'user image',
             ]);
+            return back()->with('success', 'Image has been updated');
+        }else{
+            return back()->with('error', 'Something went wrong, please try again');
         }
-
-        return back()->with('success', 'Image has been updated');
-
-
     }
 }

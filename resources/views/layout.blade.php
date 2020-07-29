@@ -180,7 +180,7 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                        <a class="dropdown-item" href="#">My account</a>
+                        <a class="dropdown-item" href="{{route('user.view', \Illuminate\Support\Facades\Auth::id())}}">My account</a>
                     </div>
                 </li>
 

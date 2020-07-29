@@ -195,6 +195,10 @@
             });
 
             $('#upload_image').on('change', function(){
+              let name = $(this).val();
+              let ext = name.substring(name.lastIndexOf('.') + 1);
+              let supportedFile = ['jpg', 'jpeg', 'png'];
+              if(supportedFile.indexOf(ext) != -1 ){
                 var reader = new FileReader();
                 reader.onload = function (event) {
                     $image_crop.croppie('bind', {
@@ -205,6 +209,11 @@
                 }
                 reader.readAsDataURL(this.files[0]);
                 $('#uploadimageModal').modal('show');
+              }else{
+                alert('this file is not supported');
+                $(this).closest('form').trigger("reset");
+              }
+
             });
 
             $('.crop_image').click(function(event){
