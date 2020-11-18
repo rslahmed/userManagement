@@ -7,8 +7,9 @@
                 <div class="card">
                     <div class="card-header text-white d-flex align-items-center justify-content-between">
                         <h4 class="mb-0">All Roles</h4>
-                        <a href="{{route('role.add')}}"
-                           class="btn bg-white text-dark btn-sm text-uppercase font-weight-bold">Add Role</a>
+                        @if(auth()->user()->role && auth()->user()->role->role_add)
+                        <a href="{{route('role.add')}}" class="btn bg-white text-dark btn-sm text-uppercase font-weight-bold">Add Role</a>
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

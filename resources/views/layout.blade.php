@@ -55,46 +55,19 @@
                         <a href="{{route('home')}}" class="collapsible-header waves-effect arrow-r">
                             <i class="w-fa fas fa-tachometer-alt"></i>Dashboards
                         </a>
-
                     </li>
                     @if(auth()->user()->role && auth()->user()->role->user_access)
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-user"></i>User<i class="fas fa-angle-down rotate-icon"></i>
+                        <a href="{{route('user.all')}}" class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-user"></i> User
                         </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                @if(auth()->user()->role && auth()->user()->role->user_add)
-                                <li>
-                                    <a href="{{ route('register') }}" class="waves-effect">Add User</a>
-                                </li>
-                                @endif
-                                <li>
-                                    <a href="{{route('user.all')}}" class="waves-effect">View User</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     @endif
 
                     @if(auth()->user()->role && auth()->user()->role->role_access)
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa far fa-check-square"></i>Role<i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                @if(auth()->user()->role && auth()->user()->role->role_add)
-                                <li>
-                                    <a href="{{route('role.add')}}" class="waves-effect">Add Role</a>
-                                </li>
-                                @endif
-                                <li>
-                                    <a href="{{route('role.all')}}" class="waves-effect">View Role</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                        <li>
+                            <a href="{{route('role.all')}}" class="collapsible-header waves-effect arrow-r"><i class="w-fa fas fa-check-square"></i> Role</a>
+                        </li>
                     @endif
 
                     @if(auth()->user()->role && auth()->user()->role->activity_log)
@@ -214,7 +187,6 @@
 <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="{{asset('js/bootstrap.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/croppie.js')}}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/sweetalert.js')}}"></script>

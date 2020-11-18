@@ -45,13 +45,14 @@ class RegisterController extends Controller
     }
 
 //    show register form
-    public function showRegistrationForm(Role $role)
+    public function showRegistrationForm()
     {
         if(!auth()->user()->role || auth()->user()->role->user_add != 1){
             return back()->with('error', "sorry, you don't have access");
         }
 
-        return view('auth.register', compact('role'));
+        $roles = Role::where('id', '!=', 1)->get();
+        return view('auth.register', compact('roles'));
     }
     /**
      * Get a validator for an incoming registration request.

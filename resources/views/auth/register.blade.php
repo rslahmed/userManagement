@@ -40,8 +40,8 @@
                                     <div class="md-form">
                                         <i class="fas fa-th-large prefix white-text"></i>
                                         <select class="mdb-select md-form initialized text-white ml-5" name="role_id" >
-                                            <option value="">Role</option>
-                                            @foreach($role->all() as $row)
+                                            <option value="" selected disabled>Role</option>
+                                            @foreach($roles as $row)
                                                 <option value="{{$row->id}}">{{$row->name}}</option>
                                             @endforeach
                                         </select>

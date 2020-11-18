@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Super Admin',
             'email' => 'admin@admin',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('admin'),
             'role_id' => 1,
             'status' => 1,
             'created_at' => \Carbon\Carbon::now(),
